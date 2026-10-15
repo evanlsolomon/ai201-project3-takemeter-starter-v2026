@@ -42,7 +42,10 @@
 <!-- Your community, and what your classifier sorts posts into. Three or four
      sentences. -->
 
-
+Community: Hacker News
+**analysis** — makes an argument backed by a specific, checkable fact. A stat, a date, a quote.
+**hot_take** — a confident claim with no support offered. Might be true. Isn't argued.
+**reaction** — an immediate response to something that just happened. Feeling, not argument.
 
 ---
 
