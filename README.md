@@ -103,13 +103,13 @@ TakeMeter sorts comments from Hacker News, a public discussion site for tech new
 
 **Which two labels:** `reaction` and `analysis`
 
-**The decision rule I use every time:** A number only counts as a checkable fact if a reader could check it without knowing the writer: a statistic, a price, a public date, a source, or a link. Numbers from the writer's own life ("20 years ago", "I've lived here almost 10 years") don't count. So a personal story that happens to contain numbers is `reaction`, and this post is `reaction`.
+**The decision rule I use every time:** A number only counts as a checkable fact if a reader could check it without knowing the writer: a statistic, a price, a public date, a source, or a link. Numbers from the writer's own life ("20 years ago", "I've lived here almost 10 years", "I paid $60 for two") don't count, but what something costs for anyone (a babysitter's hourly rate, a shipping fee) does. So a personal story that happens to contain numbers is `reaction`, and this post is `reaction`.
 
 ### Other rules I apply
 
 - **`hot_take` vs `reaction`:** If the post is about what happened to the writer or how they feel, it's `reaction`. If it says something about people, companies, or society in general, it's `hot_take`, even if it's one line or a joke. "together we are alone" is a `hot_take`.
 - **`analysis` vs `hot_take`:** If the post uses a checkable fact to support its point, it's `analysis`, even if the tone is heated. A list of reasons with no checkable fact is a `hot_take`.
-- **Skipped when collecting:** posts that only ask a question (like a reply asking for a source), link-only posts, and deleted comments. A rhetorical question that makes a claim ("What competition?") is a `hot_take`.
+- **Skipped when collecting:** posts that only ask a question (like a reply asking for a source), link-only posts, deleted comments, and one-line replies that only make sense next to the comment they answer ("Nowhere did I say that."). A rhetorical question that makes a claim ("What competition?") is a `hot_take`.
 
 ---
 
@@ -118,45 +118,62 @@ TakeMeter sorts comments from Hacker News, a public discussion site for tech new
 <!-- Where you collected from, how you labelled, your counts, and three hard
      cases. -->
 
-**Where the posts came from:**
+**Where the posts came from:** Two public Hacker News threads, collected on October 20, 2026: "Americans' social activity has steeply declined in the past 30 years" (103 posts) and "How Amazon pushes up prices all across the Internet" (107 posts). 210 posts total, each a whole comment, word for word. Claude collected them with a short script on the thread pages, and every row was checked character for character against the page.
 
-**How I labelled them:** <!-- Cold first? Pre-labelled with AI and corrected?
-Say so plainly — the disclosure is required, not penalised. -->
+Skipped while collecting: replies that open by quoting another comment, link-only posts, question-only posts, deleted comments, posts over 900 characters, one-line replies that only make sense next to their parent, and one post that was mostly song lyrics. The first pass was a random sample from each thread. Only about 1 in 6 posts came out as `analysis`, so 18 more posts that cite numbers or sources were added, and random `hot_take` and `reaction` rows were dropped to keep every label between 20% and 50% (criterion 3).
+
+**How I labelled them:** Cold first: the 20 rows marked `cold` in the note column were labelled by me with no tools, before I looked at any pre-labels. The other 190 were pre-labelled by Claude using the definitions and rules above, with a note on every borderline call (40 rows say "hard:"). I then read every pre-label and corrected the ones I disagreed with.
+<!-- TODO after your review: say how many pre-labels you changed, and update the note column
+     ("pre-labelled, checked" / "pre-labelled, corrected"). Then delete this comment. -->
 
 **Counts per label:**
 
+<!-- TODO after your review: the notebook's section 2 check cell prints these.
+     Before review: analysis 53, hot_take 73, reaction 64, plus 20 cold rows still to label. -->
+
 | Label | Count | Share |
 |---|---|---|
-|  |  |  |
-|  |  |  |
-|  |  |  |
-| **Total** |  | 100% |
+| `analysis` |  |  |
+| `hot_take` |  |  |
+| `reaction` |  |  |
+| **Total** | 210 | 100% |
 
 **Three hard cases**
 
 <!-- Any post that made you pause: what it was, which two labels it could have
-     been, and what you chose. These are worth more than the easy 190. -->
+     been, and what you chose. These are worth more than the easy 190.
+     TODO: these are drafts from the pre-labelling. Keep them only if you agree with the call. -->
 
 **1.**
 > *The post:*
 >
-> *Could have been:*
+> A few years ago I looked at the finances of a company that sells on Amazon (FBA). It was pretty astounding the number of fees they charge. They were paying to show up in sponsored results which obviously increased the fees but from what I remember between all the fees roughly 50% of the sale price of their products was just going directly to Amazon.
 >
-> *I chose, because:*
+> *Could have been:* `analysis` or `reaction`
+>
+> *I chose `reaction`, because:* "roughly 50%" sounds like a statistic, but it comes from one private company's books that only the writer saw. A reader can't check it without knowing the writer, so under my boundary rule it doesn't count, and the post is the writer's own experience.
 
 **2.**
 > *The post:*
 >
-> *Could have been:*
+> This 40 hr/week need to be combined with
+> 1) Increasing job/economic insecurity.
+> 2) Prices rising faster then income for majority of population.
+> 3) increasing commute time around employment, activity hubs
+> 4) kids activities/sports are now taken as seriously as work project deliverables. Previously it could be just gifted kids in school teams now with pay-to-play a lot more kids are involved in "serious sports".
 >
-> *I chose, because:*
+> *Could have been:* `analysis` or `hot_take`
+>
+> *I chose `hot_take`, because:* it's a structured, numbered argument and reads like analysis, but none of the four points is a fact a reader could check. My rule says a list of reasons with no checkable fact is a `hot_take`.
 
 **3.**
 > *The post:*
 >
-> *Could have been:*
+> The 55+ crowd where I'm from have the most active social life. Constantly at each others houses for a chat, activities (gossip parties) after Sunday mass etc.
 >
-> *I chose, because:*
+> *Could have been:* `reaction` or `hot_take`
+>
+> *I chose `hot_take`, because:* it comes from the writer's own town, so it reads like personal experience, but it's about other people (the 55+ crowd), not about what happened to the writer or how they feel. My `hot_take` vs `reaction` rule puts claims about other people in `hot_take`.
 
 ---
 
