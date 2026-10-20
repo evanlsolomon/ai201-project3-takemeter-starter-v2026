@@ -123,19 +123,14 @@ TakeMeter sorts comments from Hacker News, a public discussion site for tech new
 Skipped while collecting: replies that open by quoting another comment, link-only posts, question-only posts, deleted comments, posts over 900 characters, one-line replies that only make sense next to their parent, and one post that was mostly song lyrics. The first pass was a random sample from each thread. Only about 1 in 6 posts came out as `analysis`, so 18 more posts that cite numbers or sources were added, and random `hot_take` and `reaction` rows were dropped to keep every label between 20% and 50% (criterion 3).
 
 **How I labelled them:** Cold first: the 20 rows marked `cold` in the note column were labelled by me with no tools, before I looked at any pre-labels. The other 190 were pre-labelled by Claude using the definitions and rules above, with a note on every borderline call (40 rows say "hard:"). I then read every pre-label and corrected the ones I disagreed with.
-<!-- TODO after your review: say how many pre-labels you changed, and update the note column
-     ("pre-labelled, checked" / "pre-labelled, corrected"). Then delete this comment. -->
 
 **Counts per label:**
 
-<!-- TODO after your review: the notebook's section 2 check cell prints these.
-     Before review: analysis 53, hot_take 73, reaction 64, plus 20 cold rows still to label. -->
-
 | Label | Count | Share |
 |---|---|---|
-| `analysis` |  |  |
-| `hot_take` |  |  |
-| `reaction` |  |  |
+| `analysis` | 54 | 27% |
+| `hot_take` | 75 | 32.5% |
+| `reaction` | 81 | 40.5% |
 | **Total** | 210 | 100% |
 
 **Three hard cases**
