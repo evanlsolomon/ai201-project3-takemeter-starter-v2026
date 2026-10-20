@@ -42,10 +42,7 @@
 <!-- Your community, and what your classifier sorts posts into. Three or four
      sentences. -->
 
-Community: Hacker News
-**analysis** — makes an argument backed by a specific, checkable fact. A stat, a date, a quote.
-**hot_take** — a confident claim with no support offered. Might be true. Isn't argued.
-**reaction** — an immediate response to something that just happened. Feeling, not argument.
+TakeMeter sorts comments from Hacker News, a public discussion site for tech news. The posts come from two threads: "Americans' social activity has steeply declined in the past 30 years" (https://news.ycombinator.com/item?id=50089921) and "How Amazon pushes up prices all across the Internet" (https://news.ycombinator.com/item?id=50084757). Each comment gets exactly one of three labels: **analysis** (argues with a fact a reader could check), **hot_take** (a general claim with no checkable fact behind it), or **reaction** (the writer's own experience or feelings).
 
 ---
 
@@ -57,35 +54,62 @@ Community: Hacker News
      The decision rule is worth a point on its own and it's the thing most
      people leave out. Every taxonomy has a hardest boundary. Name yours. -->
 
-### `label_one`
+### `analysis`
 
-**Definition:**
+**Definition:** Argues a point using at least one specific fact a reader could check: a statistic, a price, a public date, a named source, or a link.
 
-**Example 1:**
->
+**Example 1** (Amazon thread):
+> Amazon shipping and logistics are heavily subsidised by the social contract in Western Countries - it's not remotely a fair comparison even if these were removed based on Amazon's effective corporate income tax rates coming in as low as 1.4%.
+> In the US alone Amazon has received over $11 billion in cumulative taxpayer subsidies, and governments spend an average of nearly $43,000 per fulfillment center job created.
+> This is ramping up exponentially with regard to their data center rollout. In a single instance in rural Oregon, five AWS data centers will avoid $1 billion in property taxes.
+> This is completely aside from the qualitative damage done to traditional retail, shopping districts as a whole, SME innovation on consumer products, and distorting market competition beyond all recognition.
+> https://goodjobsfirst.org/amazon-tracker/
+> https://cictar.org/all-research/amazon
 
-**Example 2:**
->
+**Example 2** (social activity thread):
+> Every single social event is a financial consideration now. Want to go out with the wife for the evening? It's going to cost $150+ for a baby sitter at $25/hour. The dinner + tip is going to cost $200. Parking is going to cost $50 - $100 if you go into a city. You could take public transportation but then you're loooking at that cost shifting back to the babysitter. Before you know it you're in for $300 - $500 just for a night off.
 
-### `label_two`
+### `hot_take`
 
-**Definition:**
+**Definition:** Makes a claim about people, companies, or society with no checkable fact behind it, even if it gives reasons.
 
-**Example 1:**
->
+**Example 1** (social activity thread):
+> This was foreseeable.  We all know it.  We all know why.  Yet we fail to do anything about it.
 
-**Example 2:**
->
+**Example 2** (social activity thread):
+> Easy.  Reduce our use of technology and stop consuming so much.  It will require you to lower your standard of living.
+> Is your partner willing to do this with you?  Probably not.
+
+### `reaction`
+
+**Definition:** Reports the writer's own experience or feelings instead of making a general claim.
+
+**Example 1** (social activity thread):
+> When I lived in the suburbs I knew all my neighbors.  You’d just naturally run into people around the neighborhood.
+> Once I moved to the city I didn’t know my neighbors.  People kept to themselves or the turnover was high.
+
+**Example 2** (Amazon thread):
+> I'm in the US and I gave up Amazon two years ago, and I haven't noticed any decrease in my quality of life.
 
 ### The hardest boundary
 
-**Which two labels:**
+**The post:**
+> I'm Canadian not American but I feel this keenly
+> I had a pretty busy social life in university, 20 years ago
+> The first city I landed in afterwards, I was able to make some connections and was lucky enough some of my uni friends were around too
+> But I moved for work to a much further away city and my social life has dropped to zero since then. The pandemic and lockdowns didn't help of course, but that was years ago. I don't have a single friend in this city and I've lived here almost 10 years now
+> Admittedly I'm kind of socially awkward and quite afraid of new groups, which has only gotten worse over the years. I also haven't had any luck making lasting connections through work or anything like that.
+> I tend to blame myself for this but it's not too surprising to hear many others are struggling too
 
-**The decision rule I used every time:**
-<!-- e.g. "If the post names a specific checkable fact, it's `analysis`, even
-     if the tone is heated." -->
+**Which two labels:** `reaction` and `analysis`
 
+**The decision rule I use every time:** A number only counts as a checkable fact if a reader could check it without knowing the writer: a statistic, a price, a public date, a source, or a link. Numbers from the writer's own life ("20 years ago", "I've lived here almost 10 years") don't count. So a personal story that happens to contain numbers is `reaction`, and this post is `reaction`.
 
+### Other rules I apply
+
+- **`hot_take` vs `reaction`:** If the post is about what happened to the writer or how they feel, it's `reaction`. If it says something about people, companies, or society in general, it's `hot_take`, even if it's one line or a joke. "together we are alone" is a `hot_take`.
+- **`analysis` vs `hot_take`:** If the post uses a checkable fact to support its point, it's `analysis`, even if the tone is heated. A list of reasons with no checkable fact is a `hot_take`.
+- **Skipped when collecting:** posts that only ask a question (like a reply asking for a source), link-only posts, and deleted comments. A rhetorical question that makes a claim ("What competition?") is a `hot_take`.
 
 ---
 
