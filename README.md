@@ -122,22 +122,18 @@ TakeMeter sorts comments from Hacker News, a public discussion site for tech new
 
 Skipped while collecting: replies that open by quoting another comment, link-only posts, question-only posts, deleted comments, posts over 900 characters, one-line replies that only make sense next to their parent, and one post that was mostly song lyrics. The first pass was a random sample from each thread. Only about 1 in 6 posts came out as `analysis`, so 18 more posts that cite numbers or sources were added, and random `hot_take` and `reaction` rows were dropped to keep every label between 20% and 50% (criterion 3).
 
-**How I labelled them:** Cold first: the 20 rows marked `cold` in the note column were labelled by me with no tools, before I looked at any pre-labels. The other 190 were pre-labelled by Claude using the definitions and rules above, with a note on every borderline call (40 rows say "hard:"). I then read every pre-label and corrected the ones I disagreed with.
+**How I labelled them:** Cold first: the 20 rows marked `cold` in the note column were labelled by me with no tools, before I looked at any pre-labels. The other 190 were pre-labelled by Claude using the definitions and rules above, with a note on every borderline call (40 rows say "hard:"). I then checked all 190 pre-labels and changed none of them.
 
 **Counts per label:**
 
 | Label | Count | Share |
 |---|---|---|
-| `analysis` | 54 | 27% |
-| `hot_take` | 75 | 32.5% |
-| `reaction` | 81 | 40.5% |
+| `analysis` | 54 | 25.7% |
+| `hot_take` | 75 | 35.7% |
+| `reaction` | 81 | 38.6% |
 | **Total** | 210 | 100% |
 
 **Three hard cases**
-
-<!-- Any post that made you pause: what it was, which two labels it could have
-     been, and what you chose. These are worth more than the easy 190.
-     TODO: these are drafts from the pre-labelling. Keep them only if you agree with the call. -->
 
 **1.**
 > *The post:*
@@ -176,16 +172,13 @@ Skipped while collecting: replies that open by quoting another comment, link-onl
 
 <!-- Your starting model, your settings, and anything you changed and why. -->
 
-**Base model:**
+**Base model:** `distilbert-base-uncased`
 
-**Settings:** <!-- epochs, learning rate, batch size, seed -->
+**Settings:** 3 epochs, learning rate 2e-5, batch size 16, 128 tokens per post, seed 42. Trained on an Apple Silicon GPU (`mps`, torch 2.14.1), as recorded in `results.json`.
 
-**Anything I changed from the defaults, and why:**
+**Anything I changed from the defaults, and why:** Nothing. Every setting is the notebook default.
 
-**Split sizes:** <!-- train / val / test, and per-label counts in the test
-split. If a label had fewer than about 8 in test, say so — it explains a lot
-of next unit's variance. -->
-
+**Split sizes:** train 146, validation 32, test 32. Test split by label: `analysis` 8, `hot_take` 12, `reaction` 12. No label is under 8 in the test split, but `analysis` is right at that line, so its score will move the most between seeds.
 
 
 ---
@@ -201,17 +194,17 @@ of next unit's variance. -->
 
 **Moment 1**
 
-- *What I asked for:*
-- *What came back:*
-- *What I changed:*
+- *What I asked for:* I asked Claude to check my Milestone 2 taxonomy against the two Hacker News threads and fix anything that wouldn't hold up.
+- *What came back:* It pointed out that my first `analysis` example ("This is more complex than you might thing…") has no stat, date or quote, so it broke my own definition. It also pointed out that my decision rule didn't settle the post I wrote it for, because the "I'm Canadian" post contains "20 years ago" and "almost 10 years".
+- *What I changed:* Swapped that example for the "$11 billion in cumulative taxpayer subsidies" post. Redefined `reaction` as the writer's own experience or feelings, since posts about "something that just happened" barely appear on HN. Added to the rule that numbers from the writer's own life don't count as checkable facts, which makes the Canadian post `reaction`.
 
 **Moment 2**
 
-- *What I asked for:*
-- *What came back:*
-- *What I changed:*
+- *What I asked for:* I asked Claude to pre-label the posts using my definitions. Partway through, it flagged a split in the social-activity thread's long argument about what a night out costs.
+- *What came back:* Two kinds of price posts that my rule treated the same: "It's going to cost $150+ for a baby sitter at $25/hour" (what something costs for anyone) and "I paid $60 for two at a local restaurant last week" (what the writer spent). It labelled the first `analysis` and the second `reaction`.
+- *What I changed:* Added the price case to my decision rule: what something costs for anyone counts as a checkable fact, and what the writer personally paid doesn't.
 
-**Pre-labelling disclosure:**
+**Pre-labelling disclosure:** Claude collected all 210 posts and pre-labelled 190 of them using my definitions, with a "hard:" note on 40 borderline calls. I labelled the 20 `cold` rows myself, by hand, before looking at any pre-labels. I then checked all 190 pre-labels and changed none. The note column marks which rows are which.
 
 <!-- ═══════════════════════ UNIT 6 — THE TEST ═══════════════════════
 
